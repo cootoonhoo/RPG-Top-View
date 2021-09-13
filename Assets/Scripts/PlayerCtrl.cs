@@ -28,5 +28,11 @@ private RaycastHit2D hit;
             //Movimento eixo X
             transform.Translate(moveDelta.x*Time.deltaTime,0,0);
             }
+            if(moveDelta.x < 0){
+                transform.localScale = new Vector3(-1,1,1);
+            }
+            else{
+                 transform.localScale = new Vector3(1,1,1);
+            }
         }
 }
