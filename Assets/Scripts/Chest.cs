@@ -11,7 +11,7 @@ public class Chest : Collectable
         if(!collected){
             collected = true;
             GetComponent<SpriteRenderer>().sprite = emptyChest;
-            Debug.Log("Dar " + QntGold +" gold!");
+            GameManager.instance.ShowText("+"+ QntGold + " gold!", 25,Color.yellow,transform.position,Vector3.up * 75, 0.75f);
         }
     }
 } 
