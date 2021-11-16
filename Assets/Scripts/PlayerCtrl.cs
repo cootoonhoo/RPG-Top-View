@@ -2,37 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
  
-public class PlayerCtrl : MonoBehaviour
+public class PlayerCtrl : Mover
 {
-private BoxCollider2D boxCollider;
-private Vector3 moveDelta;
-private RaycastHit2D hit;
-    void Start (){
-    boxCollider = GetComponent <BoxCollider2D>();
-}
-    void FixedUpdate(){
-    float x = Input.GetAxisRaw("Horizontal");
-    float y = Input.GetAxisRaw("Vertical");
- 
-    moveDelta = new Vector3(x,y,0);
-    //Verificando se podemos seguir nessa direção (Y)
-    hit = Physics2D.BoxCast(transform.position, boxCollider.size,0, new Vector2 (0,moveDelta.y),Mathf.Abs(moveDelta.y*Time.deltaTime), LayerMask.GetMask("Personagens","Collider"));
-    if(hit.collider == null){
-            //Movimento eixo Y
-            transform.Translate(0,moveDelta.y*Time.deltaTime,0);
-            }
-    
-    //Verificando se podemos seguir nessa direção (X)
-    hit = Physics2D.BoxCast(transform.position, boxCollider.size,0, new Vector2 (moveDelta.x,0),Mathf.Abs(moveDelta.x*Time.deltaTime), LayerMask.GetMask("Personagens","Collider"));
-    if(hit.collider == null){
-            //Movimento eixo X
-            transform.Translate(moveDelta.x*Time.deltaTime,0,0);
-            }
-            if(moveDelta.x <0){
-                transform.localScale = new Vector3(-1,1,1);
-            }
-            else if(moveDelta.x > 0){
-                 transform.localScale = new Vector3(1,1,1);
-            }
-        }
+    private void FixedUpdate(){
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+
+        UpdateMotor(new Vector3 (x,y,0));
+    }
 }
